@@ -18,7 +18,7 @@
       <option value="8">8x8</option>
     </select>
 
-    <button type="button" @click="arrayPush(); hideStartButton(); startTimer()" v-bind:class="{'hiddenItem' : hidden}">Start Game</button>
+    <button type="button" @click="arrayPush" v-bind:class="{'hiddenItem' : hidden}">Start Game</button>
     
     
     <p v-if="hidden == true">ROUND: {{round}}</p>
@@ -154,6 +154,9 @@ export default {
   methods: {
 
     arrayPush: function() {
+      this.stopTimer()
+      this.hideStartButton()
+      
       for(let i=0; i<this.lockedBoardSize; i++){
         this.cardList.push({
           value: i,
