@@ -154,33 +154,41 @@ export default {
   methods: {
 
     arrayPush: function() {
-      this.stopTimer()
-      this.hideStartButton()
-      
-      for(let i=0; i<this.lockedBoardSize; i++){
-        this.cardList.push({
-          value: i,
-        })
-      }
+
+      if(this.lockedBoardSize != 0){
 
       
-      for (let i = 0; i<this.cardList.length/2; i++){
-        this.cardList[i].matchId = this.flags[i]
+        this.startTimer()
+        this.hideStartButton()
+
+        for(let i=0; i<this.lockedBoardSize; i++){
+          this.cardList.push({
+            value: i,
+          })
+        }
+
+        
+        for (let i = 0; i<this.cardList.length/2; i++){
+          this.cardList[i].matchId = this.flags[i]
+        }
+        
+        for (let i = this.cardList.length/2; i<this.cardList.length; i++){
+          this.cardList[i].matchId = this.flags[i - this.cardList.length/2]
+        }
+
+        this.shuffelArray(this.cardList)
+
+        for(let i = 0; i < this.cardList.length; i++){
+          this.cardList[i].position = i
+        }
+
+        this.cardPairs = this.lockedBoardSize/2
+
+        this.msg = this.playerList[0].nickname + " STARTS"
       }
-      
-      for (let i = this.cardList.length/2; i<this.cardList.length; i++){
-        this.cardList[i].matchId = this.flags[i - this.cardList.length/2]
+      else{
+        alert("PLEASE SELECT BOARD SIZE BEFOR STARTING THE GAME")
       }
-
-      this.shuffelArray(this.cardList)
-
-      for(let i = 0; i < this.cardList.length; i++){
-        this.cardList[i].position = i
-      }
-
-      this.cardPairs = this.lockedBoardSize/2
-
-      this.msg = this.playerList[0].nickname + " STARTS"
       
     },
 
