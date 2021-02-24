@@ -300,6 +300,12 @@ export default {
       this.msg = this.playerList[0].nickname + " STARTS"
       this.pairsFound = 0
       this.resetTimer()
+
+      this.shuffelArray(this.cardList)
+
+      for(let i = 0; i < this.cardList.length; i++){
+        this.cardList[i].position = i
+      }
     },
 
     startTimer: function(){
